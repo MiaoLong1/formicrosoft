@@ -1,0 +1,83 @@
+.catalog:
+  name: WebSphere integrates IHS 
+  version: 8.5.5.0
+  description: |
+      WebSphere integrates IHS by Cloudsoar
+  questions:
+    - variable: "ihsscale"
+      description: "Number of IHS node"
+      label: "number of ihs nodes"
+      required: true
+      default: 2
+      type: "int"
+    - variable: "wasnodescale"
+      description: "Number of AppSrv node"
+      label: "number of appsrv nodes"
+      required: true
+      default: 2
+      type: "int"
+    - variable: "dmgrport"
+      description: "The port number of dmgr"
+      label: "the port number of dmgr"
+      required: true
+      default: 9043
+      type: "int"
+    - variable: "dmgrlocation"
+      description: "The location of the dmgr"
+      label: "the location of the dmgr"
+      required: true
+      default: 10.0.0.7
+      type: "string"
+    - variable: "lbport"
+      description: "The port number of loadbalance"
+      label: "the port number of loadbalance"
+      required: true
+      default: 80
+      type: "int"
+    - variable: "lblocation"
+      description: "The location of the lb"
+      label: "the location of the lb"
+      required: true
+      default: 10.0.0.6
+      type: "string"
+    - variable: "applocation"
+      description: "The location of the application packet"
+      label: "the location of the application packet"
+      required: true
+      default: http://127.0.0.1/app.war 
+      type: "string"
+    - variable: "appdir"
+      description: "The context of the application"
+      label: "the context of the application"
+      required: true
+      default: app
+      type: "string"
+
+ihs:
+  scale: ${ihsscale}
+  metadata:
+    dmgrport:
+      dmgrport: ${dmgrport}
+WasNode:
+  scale: ${wasnodescale}
+  metadata:
+    dmgrport:
+      dmgrport: ${dmgrport}
+dmgr:
+  scale: 1
+  metadata:
+    dmgrport:
+      dmgrport: ${dmgrport}
+    lbport:
+      lbport: ${lbport}
+    applocation:
+      applocation: ${applocation}
+    appdir:
+      appdir: ${appdir}
+    ihsscale:
+      ihsscale: ${ihsscale}
+    wasnodescale:
+      wasnodescale: ${wasnodescale} 
+lb:
+  scale: 1
+

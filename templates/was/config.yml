@@ -1,0 +1,9 @@
+name: WebSphere integrates IHS
+description: |
+  (Experimental)WebSphere integrates IHS by Cloudsoar
+version: 8.5.5.0
+category: Application Infrastructure
+maintainer: "sale@cloudsoar.com"
+minimum_rancher_version: v0.56.0
+license:
+

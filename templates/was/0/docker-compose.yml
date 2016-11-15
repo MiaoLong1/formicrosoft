@@ -1,0 +1,40 @@
+ihs:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: 10.0.0.10:5002/admin/ihs:v3
+  links:
+  - WasNode:WasNode
+  privileged: true
+  stdin_open: true
+WasNode:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: 10.0.0.10:5002/admin/wasnode:v3
+  links:
+  - dmgr:dmgr
+  privileged: true
+  stdin_open: true
+dmgr:
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=${dmgrlocation}
+    io.rancher.container.pull_image: always
+  ports:
+  - ${dmgrport}:${dmgrport}/tcp
+  tty: true
+  image: 10.0.0.10:5002/admin/dmgr:v3
+  privileged: true
+  stdin_open: true
+lb:
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=${lblocation}
+    io.rancher.container.pull_image: always
+  ports:
+  - ${lbport}:80/tcp
+  tty: true
+  image: 10.0.0.10:5002/admin/nginx_was:v2
+  links:
+  - 'ihs:'
+  privileged: true
+  stdin_open: true
